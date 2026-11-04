@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #0D0F0E;
+    --bg-elevated: #131715;
+    --bg-card: #181C1A;
+    --bg-card-hover: #1E2320;
+    --border-subtle: #232B27;
+    --border-luminous: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(217, 243, 106, 0.3);
+    
+    --lime: #D9F36A;
+    --lime-hover: #CBEA4F;
+    --lime-glow: rgba(217, 243, 106, 0.15);
+    --cyan-accent: #38BDF8;
+    --emerald-accent: #10B981;
+
+    --text-primary: #F7F7F4;
+    --text-secondary: #9EABA2;
+    --text-muted: #64716A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Accessible focus styling */
+  :focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--lime);
+    color: #121514;
+  }
+}
+
+/* Cyber Blueprint Grid Pattern */
+.cyber-grid {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.cyber-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+}
+
+/* Gradient Heading */
+.gradient-heading {
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #E8EAE6 60%, #98A69E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-heading-lime {
+  background-image: linear-gradient(135deg, #FFFFFF 20%, #D9F36A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphic Cyber Panels */
+.glass-panel {
+  background: rgba(20, 24, 22, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-elevated {
+  background: rgba(25, 30, 28, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(26, 32, 29, 0.9);
+  border-color: rgba(217, 243, 106, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px 0 rgba(217, 243, 106, 0.05);
+}
+
+/* Shimmer Border Animation */
+@keyframes borderGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.shimmer-glow {
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+/* Radar scan animation for cyber status */
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-radar {
+  animation: radarSweep 6s linear infinite;
+}
