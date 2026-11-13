@@ -2,8 +2,7 @@
 
 import React from "react";
 import { siteConfig } from "@/lib/site-config";
-import { Check, ArrowRight, Sparkles, Code2, Cpu, Wrench, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Check, ArrowUpRight, Code2, Cpu, Wrench, Sparkles } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { trackEvent } from "@/lib/analytics";
 
@@ -11,13 +10,13 @@ export function ServicesSection() {
   const getServiceIcon = (id: string) => {
     switch (id) {
       case "web-development":
-        return <Code2 className="w-5 h-5 text-[#38BDF8]" />;
+        return <Code2 className="w-5 h-5 text-white" />;
       case "ai-automation":
-        return <Cpu className="w-5 h-5 text-[#D9F36A]" />;
+        return <Cpu className="w-5 h-5 text-white" />;
       case "ongoing-support":
-        return <Wrench className="w-5 h-5 text-[#10B981]" />;
+        return <Wrench className="w-5 h-5 text-white" />;
       default:
-        return <Sparkles className="w-5 h-5 text-[#D9F36A]" />;
+        return <Sparkles className="w-5 h-5 text-white" />;
     }
   };
 
@@ -35,98 +34,83 @@ export function ServicesSection() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative py-24 sm:py-32 bg-[#0D0F0E] text-[#F7F7F4] border-b border-white/[0.08] cyber-grid overflow-hidden"
+      className="relative py-24 sm:py-32 bg-[#070809] text-white border-b border-white/[0.08]"
     >
-      {/* Ambient center lighting */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-[#D9F36A]/[0.04] blur-[160px] rounded-full pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
-          <Badge variant="cyber" className="mb-4">
-            <Zap className="w-3.5 h-3.5" />
-            <span>Core Service Offerings</span>
-          </Badge>
-          <h2
-            id="services-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight gradient-heading leading-tight"
-          >
-            Engineering digital assets and automations that deliver commercial outcomes.
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#9EABA2] leading-relaxed">
-            I don&apos;t build generic websites or unvetted AI experiments. Every deliverable is designed around your business constraints, customer trust, and operational efficiency.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/[0.08] mb-12 sm:mb-16">
+          <div className="max-w-3xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-white/50 block mb-3">
+              [03/06] CORE CAPABILITIES
+            </span>
+            <h2
+              id="services-heading"
+              className="font-display font-extrabold text-3xl sm:text-5xl tracking-[-0.03em] text-white leading-[1.08]"
+            >
+              Engineered digital infrastructure.{" "}
+              <span className="text-white/40">Built for commercial outcomes.</span>
+            </h2>
+          </div>
+
+          <div className="max-w-xs font-mono text-xs text-white/50 md:text-right">
+            <span>NO TEMPLATE RESELLING. NO UNVERIFIED AI HYPE. STRICT PRODUCTION STANDARDS.</span>
+          </div>
         </div>
 
-        {/* Services 3-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        {/* 3-Column Architectural Spec Grid (Hairline borders, no card fatigue) */}
+        <div className="border border-white/[0.08] bg-[#090B0D] grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
           {siteConfig.services.map((service, index) => {
-            const isFeatured = index === 1; // AI & Automation highlight
+            const isFeatured = index === 1;
             const whatsappContext = getWhatsAppContext(service.id);
 
             return (
               <div
                 key={service.id}
-                className={`relative rounded-2xl flex flex-col justify-between p-8 sm:p-9 transition-all duration-300 border ${
-                  isFeatured
-                    ? "glass-panel-elevated border-[#D9F36A]/50 shadow-[0_0_35px_rgba(217,243,106,0.12)] lg:-translate-y-2 ring-1 ring-[#D9F36A]/30"
-                    : "glass-panel glass-panel-hover"
+                className={`p-8 sm:p-10 flex flex-col justify-between transition-colors ${
+                  isFeatured ? "bg-[#0E1013]" : "hover:bg-white/[0.015]"
                 }`}
               >
-                {isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="px-3.5 py-1 rounded-full bg-[#D9F36A] text-[#121514] font-extrabold text-[10px] font-mono uppercase tracking-widest shadow-[0_0_15px_rgba(217,243,106,0.4)]">
-                      ★ High Operational ROI
-                    </span>
-                  </div>
-                )}
-
                 <div>
-                  {/* Eyebrow & Icon */}
-                  <div className="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-6">
-                    <div className="p-2.5 rounded-xl bg-[#141816] border border-white/10 shadow-inner">
-                      {getServiceIcon(service.id)}
-                    </div>
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#7C8B82]">
-                      {service.eyebrow}
+                  {/* Top Eyebrow & Index */}
+                  <div className="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-6 font-mono text-xs">
+                    <span className="text-white/40 uppercase tracking-widest">
+                      0{index + 1} // {service.eyebrow}
                     </span>
+                    {isFeatured && (
+                      <span className="text-[10px] uppercase tracking-wider text-black bg-white px-2 py-0.5 font-bold">
+                        HIGH DEMAND
+                      </span>
+                    )}
                   </div>
 
                   {/* Title & Tagline */}
-                  <h3 className="text-2xl font-bold text-white mb-3">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight">
                     {service.name}
                   </h3>
-                  <p className="text-sm text-[#9EABA2] leading-relaxed mb-6">
+                  <p className="text-sm text-white/60 font-sans leading-relaxed mb-8">
                     {service.tagline}
                   </p>
 
-                  {/* Pricing Box */}
-                  <div className="p-4 rounded-xl bg-[#101312] border border-white/[0.08] mb-6 space-y-1.5">
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-[11px] uppercase tracking-wider text-[#7C8B82] font-mono">
-                        Pricing Guide
-                      </span>
-                      <span className="text-base sm:text-lg font-bold font-mono text-[#D9F36A]">
-                        {service.startingPrice}
-                      </span>
+                  {/* Pricing Telemetry Box */}
+                  <div className="p-4 bg-white/[0.03] border border-white/[0.08] mb-8 font-mono">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <span className="text-[10px] uppercase text-white/40">Investment Guide</span>
+                      <span className="text-base font-bold text-white">{service.startingPrice}</span>
                     </div>
-                    <p className="text-[11px] text-[#8E9B93] leading-normal font-mono">
+                    <p className="text-[10px] text-white/40 leading-normal">
                       {service.pricingNote}
                     </p>
                   </div>
 
-                  {/* Deliverables List */}
+                  {/* Deliverables Checklist */}
                   <div className="space-y-3 mb-8">
-                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#A0ACA4] block">
-                      Engineered Deliverables:
+                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white/70 block">
+                      Production Scope:
                     </span>
                     <ul className="space-y-2.5">
                       {service.deliverables.map((item, dIdx) => (
-                        <li key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#9EABA2]">
-                          <Check className="w-4 h-4 text-[#D9F36A] shrink-0 mt-0.5" />
+                        <li key={dIdx} className="flex items-start gap-2.5 text-xs text-white/70 font-sans">
+                          <Check className="w-4 h-4 text-white shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -134,22 +118,22 @@ export function ServicesSection() {
                   </div>
                 </div>
 
-                {/* CTAs: Form Anchor & Contextual WhatsApp */}
+                {/* CTAs */}
                 <div className="pt-6 border-t border-white/[0.08] space-y-3">
                   <a
                     href="#contact"
                     onClick={() => handleCtaClick(service.id, service.ctaText)}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D9F36A] text-[#121514] font-bold text-xs uppercase tracking-wider hover:bg-[#CBEA4F] hover:shadow-[0_0_20px_rgba(217,243,106,0.3)] transition-all text-center"
+                    className="w-full flex items-center justify-between py-3 px-4 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all text-center"
                   >
                     <span>{service.ctaText}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
 
                   <WhatsAppButton
                     service={whatsappContext}
                     variant="outline"
-                    label="Direct WhatsApp Inquiry"
-                    className="w-full text-xs py-2.5 border-white/10 hover:border-white/20 text-[#D0DDD5]"
+                    label="WhatsApp Direct Inquire"
+                    className="w-full text-xs py-2.5 border-white/10 hover:border-white/20 text-white/80 font-mono"
                   />
                 </div>
               </div>
@@ -157,9 +141,14 @@ export function ServicesSection() {
           })}
         </div>
 
-        {/* Realistic Expectations Notice */}
-        <div className="mt-12 p-6 rounded-2xl glass-panel max-w-3xl mx-auto text-xs font-mono text-[#8E9B93] leading-relaxed text-center border-white/[0.08]">
-          <span className="text-white font-bold">ENGINEERING CONTRACT:</span> High-quality systems require thoughtful scoping and quality inputs. AI solutions are tailored to specific validated workflows with human-in-the-loop safeguards—never marketed as blanket magic.
+        {/* Engineering Contract Footer */}
+        <div className="mt-12 p-6 border border-white/[0.08] bg-white/[0.015] font-mono text-xs text-white/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <span className="text-white font-bold">COMMERCIAL CONTRACT:</span> Every deliverable includes full source code handover, documented APIs, and zero ongoing vendor lock-in.
+          </div>
+          <a href="#calculator" className="text-white hover:underline uppercase tracking-wider font-bold shrink-0">
+            Open Scope Estimator &rarr;
+          </a>
         </div>
       </div>
     </section>

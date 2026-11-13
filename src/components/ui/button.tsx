@@ -10,25 +10,25 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = "primary", size = "md", fullWidth = false, className = "", children, ...props }, ref) => {
     const base =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9F36A] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer rounded-lg select-none";
+      "inline-flex items-center justify-center font-mono uppercase tracking-wider transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white disabled:opacity-50 disabled:pointer-events-none cursor-pointer select-none";
 
     const sizes = {
-      sm: "text-xs px-3.5 py-2 gap-1.5",
-      md: "text-sm px-5 py-2.5 gap-2",
-      lg: "text-base px-6 py-3.5 gap-2.5 font-semibold",
+      sm: "text-[11px] px-3 py-1.5 gap-1.5",
+      md: "text-xs px-5 py-2.5 gap-2 font-bold",
+      lg: "text-xs px-6 py-3.5 gap-2.5 font-bold",
     };
 
     const variants = {
       primary:
-        "bg-[#D9F36A] text-[#121514] font-semibold hover:bg-[#CBEA4F] active:scale-[0.99] shadow-sm hover:shadow-md",
+        "bg-white text-black font-bold hover:bg-neutral-200 active:scale-[0.98]",
       secondary:
-        "bg-[#1F2321] text-[#F7F7F4] hover:bg-[#282E2B] border border-[#2E3532] active:scale-[0.99]",
+        "bg-white/[0.04] text-white hover:bg-white/[0.08] border border-white/10 active:scale-[0.98]",
       outline:
-        "border border-[#2E3532] text-[#F7F7F4] hover:bg-[#1F2321] hover:border-[#9EABA2] active:scale-[0.99]",
+        "border border-white/15 text-white hover:bg-white/[0.05] active:scale-[0.98]",
       ghost:
-        "text-[#9EABA2] hover:text-[#F7F7F4] hover:bg-[#1F2321]/50",
+        "text-white/60 hover:text-white hover:bg-white/[0.04]",
       dark:
-        "bg-[#171A19] text-[#F7F7F4] hover:bg-[#222725] border border-[#2E3532] active:scale-[0.99]",
+        "bg-[#0D0F11] text-white hover:bg-[#15181C] border border-white/10 active:scale-[0.98]",
     };
 
     const width = fullWidth ? "w-full" : "";

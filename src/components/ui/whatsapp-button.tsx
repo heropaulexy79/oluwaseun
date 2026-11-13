@@ -34,17 +34,17 @@ export function WhatsAppButton({
   };
 
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9F36A] focus-visible:ring-offset-2 select-none";
+    "inline-flex items-center justify-center gap-2 font-mono uppercase tracking-wider text-xs font-bold transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white select-none";
 
   const variants = {
     primary:
-      "bg-[#25D366] text-[#121514] font-semibold hover:bg-[#20BA5A] px-5 py-2.5 text-sm shadow-sm hover:shadow active:scale-[0.99]",
+      "bg-white text-black hover:bg-neutral-200 px-5 py-3 active:scale-[0.98]",
     secondary:
-      "bg-[#1F2321] text-[#F7F7F4] hover:bg-[#282E2B] border border-[#2E3532] px-4 py-2 text-sm",
+      "bg-white/[0.04] text-white hover:bg-white/[0.08] border border-white/10 px-4 py-2.5",
     outline:
-      "border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-4 py-2 text-sm",
+      "border border-white/15 text-white hover:bg-white/[0.05] px-4 py-2.5",
     inline:
-      "text-[#25D366] hover:underline p-0 font-semibold",
+      "text-white hover:underline p-0 font-bold",
   };
 
   return (
@@ -56,7 +56,7 @@ export function WhatsAppButton({
       aria-label={`${label} (Opens in WhatsApp)`}
       className={`${baseStyles} ${variants[variant]} ${className}`}
     >
-      {showIcon && <MessageSquare className="w-4 h-4 shrink-0 fill-current" aria-hidden="true" />}
+      {showIcon && <MessageSquare className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
       <span>{label}</span>
     </a>
   );

@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowUpRight, Terminal } from "lucide-react";
+import { Menu, X, ArrowUpRight, MessageSquare } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { trackEvent } from "@/lib/analytics";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,7 +22,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle ESC key to close mobile menu
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && mobileMenuOpen) {
@@ -48,11 +48,13 @@ export function Navbar() {
     setMobileMenuOpen(false);
   };
 
+  const whatsappUrl = getWhatsAppUrl({ service: "general" });
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0D0F0E]/85 backdrop-blur-xl border-b border-white/[0.08] py-3.5 shadow-2xl shadow-black/50"
+          ? "bg-[#090B0E]/85 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-2xl shadow-black/60"
           : "bg-transparent py-5 border-b border-transparent"
       }`}
     >
@@ -63,55 +65,82 @@ export function Navbar() {
         {/* Wordmark */}
         <Link
           href="/"
-          className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9F36A] rounded-md py-1"
+          className="group flex items-center gap-2.5 focus-visible:outline-none"
           aria-label="Oluwaseun - Home"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#181C1A] border border-white/10 flex items-center justify-center font-mono font-bold text-sm text-[#D9F36A] group-hover:border-[#D9F36A]/50 transition-all shadow-inner">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 text-white font-mono font-black text-sm flex items-center justify-center shadow-lg shadow-indigo-500/20">
             OS
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-lg sm:text-xl tracking-tight text-[#F7F7F4] group-hover:text-white transition-colors leading-none flex items-center gap-1">
-              Oluwaseun<span className="text-[#D9F36A] inline-block">.</span>
+            <span className="font-display font-bold text-base tracking-tight text-white group-hover:text-indigo-200 transition-colors leading-tight">
+              Oluwaseun
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#7C8B82] pt-1">
-              Engineering Studio
+            <span className="text-[11px] text-slate-400 font-sans tracking-normal">
+              Software Engineer &amp; AI Consultant
             </span>
           </div>
         </Link>
 
-        {/* Live Cyber Beacon Indicator */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[#141816] border border-white/[0.08] text-[11px] font-mono text-[#9EABA2]">
+        {/* Center: Live Availability Pill */}
+        <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-sans text-slate-300">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D9F36A] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D9F36A]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span className="text-white/80">AVAILABLE</span>
-          <span className="text-[#55635C]">/</span>
-          <span className="text-[#8B9890]">SELECT ENGAGEMENTS</span>
+          <span>Available for Q2-Q3 Projects</span>
         </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-7">
-          {siteConfig.navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => handleNavClick(link.label)}
-              className="text-xs uppercase tracking-wider font-mono text-[#9EABA2] hover:text-[#D9F36A] transition-colors py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D9F36A] rounded"
-            >
-              {link.label}
-            </a>
-          ))}
+          <a
+            href="#work"
+            onClick={() => handleNavClick("Work")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            Selected Work
+          </a>
+          <a
+            href="#capabilities"
+            onClick={() => handleNavClick("Capabilities")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            Capabilities
+          </a>
+          <a
+            href="#calculator"
+            onClick={() => handleNavClick("Pricing")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            Pricing &amp; Scope
+          </a>
+          <a
+            href="#about"
+            onClick={() => handleNavClick("About")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            About
+          </a>
         </div>
 
-        {/* CTA & Mobile Toggle */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-3">
           <a
-            href="#contact"
-            onClick={() => handleNavClick("Discuss a Project CTA")}
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D9F36A] text-[#121514] font-bold text-xs uppercase tracking-wider hover:bg-[#CBEA4F] hover:shadow-[0_0_20px_rgba(217,243,106,0.3)] transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9F36A]"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => handleNavClick("Header WhatsApp")}
+            className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 border border-[#25D366]/30 font-sans font-medium text-xs transition-all"
           >
-            <span>Discuss Project</span>
+            <MessageSquare className="w-3.5 h-3.5 fill-current" />
+            <span>WhatsApp</span>
+          </a>
+
+          <a
+            href="#contact"
+            onClick={() => handleNavClick("Header Discuss CTA")}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white text-black font-sans font-semibold text-xs tracking-normal hover:bg-slate-200 transition-all shadow-md active:scale-95"
+          >
+            <span>Start a Project</span>
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
 
@@ -122,8 +151,8 @@ export function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
-            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="md:hidden p-2 text-[#F7F7F4] hover:text-[#D9F36A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9F36A] rounded-lg border border-white/10 bg-[#141816]"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            className="md:hidden p-2 text-white border border-white/10 rounded-lg bg-white/[0.04]"
           >
             {mobileMenuOpen ? (
               <X className="w-5 h-5" aria-hidden="true" />
@@ -134,44 +163,68 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
           ref={mobileMenuRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile Navigation Menu"
-          className="md:hidden fixed inset-x-0 top-[60px] bottom-0 bg-[#0D0F0E]/98 backdrop-blur-2xl border-t border-white/10 p-6 flex flex-col justify-between overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
+          className="md:hidden fixed inset-x-0 top-[60px] bottom-0 bg-[#090B0E]/98 backdrop-blur-2xl border-t border-white/10 p-6 flex flex-col justify-between overflow-y-auto"
         >
-          <div className="flex flex-col gap-4 pt-4">
-            <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#7C8B82]">
-              SYSTEM::NAV
+          <div className="flex flex-col gap-5 pt-4">
+            <span className="text-xs font-mono uppercase tracking-widest text-slate-500">
+              NAVIGATION
             </span>
-            {siteConfig.navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => handleNavClick(link.label)}
-                className="text-lg font-medium text-[#F7F7F4] hover:text-[#D9F36A] py-2.5 border-b border-white/[0.06] transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            <a
+              href="#work"
+              onClick={() => handleNavClick("Mobile Work")}
+              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+            >
+              Selected Work
+            </a>
+            <a
+              href="#capabilities"
+              onClick={() => handleNavClick("Mobile Capabilities")}
+              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+            >
+              Capabilities
+            </a>
+            <a
+              href="#calculator"
+              onClick={() => handleNavClick("Mobile Pricing")}
+              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+            >
+              Pricing &amp; Scope
+            </a>
+            <a
+              href="#about"
+              onClick={() => handleNavClick("Mobile About")}
+              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+            >
+              About
+            </a>
           </div>
 
-          <div className="pt-6 pb-8 border-t border-white/[0.06] flex flex-col gap-3">
+          <div className="pt-6 pb-8 border-t border-white/10 flex flex-col gap-3">
             <a
               href="#contact"
-              onClick={() => handleNavClick("Mobile Discuss CTA")}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-[#D9F36A] text-[#121514] font-bold text-xs uppercase tracking-wider text-center shadow-[0_0_20px_rgba(217,243,106,0.3)]"
+              onClick={() => handleNavClick("Mobile Start CTA")}
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-black font-sans font-bold text-sm text-center shadow-lg"
             >
-              <span>Discuss Project</span>
-              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              <span>Start a Project</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-            <p className="text-xs font-mono text-center text-[#7C8B82]">
-              High-standard Web & AI Automation Engineering.
-            </p>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleNavClick("Mobile WhatsApp CTA")}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#25D366] text-black font-sans font-bold text-sm text-center shadow-md"
+            >
+              <MessageSquare className="w-4 h-4 fill-current" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       )}
