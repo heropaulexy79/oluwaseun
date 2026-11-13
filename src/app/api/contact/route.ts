@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/contact-schema";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendEnquiryNotification } from "@/lib/email";
+import { sendToSheetWebhook } from "@/lib/sheet-webhook";
 
 export async function POST(req: NextRequest) {
   try {
@@ -58,18 +59,61 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 6. Dispatch email notification via Resend
-    const result = await sendEnquiryNotification(validationResult.data);
+    // 6. Deliver lead: Try Sheet Webhook (Excel/Google Sheets) and/or Resend Email
+    const sheetConfigured = Boolean(
+      process.env.EXCEL_SHEET_WEBHOOK_URL || process.env.GOOGLE_SHEETS_WEBHOOK_URL
+    );
+    const emailConfigured = Boolean(
+      process.env.RESEND_API_KEY && process.env.CONTACT_NOTIFICATION_EMAIL
+    );
 
-    if (!result.success) {
-      const statusCode = result.isConfigurationMissing ? 503 : 502;
+    let delivered = false;
+    let sheetResult;
+    let emailResult;
+
+    // Send to Sheet Webhook if configured
+    if (sheetConfigured) {
+      sheetResult = await sendToSheetWebhook(validationResult.data);
+      if (sheetResult.success) {
+        delivered = true;
+      }
+    }
+
+    // Also dispatch via Resend if configured
+    if (emailConfigured) {
+      emailResult = await sendEnquiryNotification(validationResult.data);
+      if (emailResult.success) {
+        delivered = true;
+      }
+    }
+
+    // If neither is configured, alert the admin gracefully
+    if (!sheetConfigured && !emailConfigured) {
       return NextResponse.json(
         {
           success: false,
-          error: result.error || "Unable to deliver enquiry at this moment.",
-          isConfigurationMissing: result.isConfigurationMissing,
+          error:
+            process.env.NODE_ENV === "development"
+              ? "Backend integration is not configured. Please set EXCEL_SHEET_WEBHOOK_URL or RESEND_API_KEY in .env.local."
+              : "Service is temporarily unable to dispatch enquiry. Please reach out directly on WhatsApp.",
+          isConfigurationMissing: true,
         },
-        { status: statusCode }
+        { status: 503 }
+      );
+    }
+
+    // If configured but both failed
+    if (!delivered) {
+      const errorMsg =
+        sheetResult?.error ||
+        emailResult?.error ||
+        "Unable to deliver enquiry at this moment.";
+      return NextResponse.json(
+        {
+          success: false,
+          error: errorMsg,
+        },
+        { status: 502 }
       );
     }
 

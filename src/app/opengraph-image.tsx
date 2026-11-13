@@ -78,7 +78,7 @@ export default async function OGImage() {
             color: "#9EABA2",
           }}
         >
-          <div>Starting: Web from ₦400k • Retainers from ₦75k/mo</div>
+          <div>Starting: Web from NGN 400k • Retainers from NGN 75k/mo</div>
           <div style={{ color: "#D9F36A", fontWeight: "600" }}>oluwaseun.dev</div>
         </div>
       </div>
