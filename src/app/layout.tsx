@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Syne } from "next/font/google";
+import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -17,10 +17,11 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: ["500", "600", "700", "800"],
 });
 
 export const viewport: Viewport = {
@@ -97,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} h-full antialiased selection:bg-white selection:text-black`}
+      className={`${geistSans.variable} ${geistMono.variable} ${plusJakartaSans.variable} h-full antialiased selection:bg-indigo-500 selection:text-white`}
     >
       <body className="min-h-full flex flex-col bg-[#171A19] text-[#F7F7F4] font-sans">
         {/* Accessible Skip Link */}

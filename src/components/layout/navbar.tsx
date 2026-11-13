@@ -93,18 +93,18 @@ export function Navbar() {
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-7">
           <a
+            href="#why-partner"
+            onClick={() => handleNavClick("Why Partner")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            Why Partner
+          </a>
+          <a
             href="#work"
             onClick={() => handleNavClick("Work")}
             className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
           >
             Selected Work
-          </a>
-          <a
-            href="#capabilities"
-            onClick={() => handleNavClick("Capabilities")}
-            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
-          >
-            Capabilities
           </a>
           <a
             href="#calculator"
@@ -114,11 +114,11 @@ export function Navbar() {
             Pricing &amp; Scope
           </a>
           <a
-            href="#about"
-            onClick={() => handleNavClick("About")}
+            href="#contact"
+            onClick={() => handleNavClick("Contact")}
             className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
           >
-            About
+            Contact
           </a>
         </div>
 
@@ -177,32 +177,32 @@ export function Navbar() {
               NAVIGATION
             </span>
             <a
+              href="#why-partner"
+              onClick={() => handleNavClick("Mobile Why Partner")}
+              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
+            >
+              Why Partner
+            </a>
+            <a
               href="#work"
               onClick={() => handleNavClick("Mobile Work")}
-              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
             >
               Selected Work
             </a>
             <a
-              href="#capabilities"
-              onClick={() => handleNavClick("Mobile Capabilities")}
-              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
-            >
-              Capabilities
-            </a>
-            <a
               href="#calculator"
               onClick={() => handleNavClick("Mobile Pricing")}
-              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
             >
               Pricing &amp; Scope
             </a>
             <a
-              href="#about"
-              onClick={() => handleNavClick("Mobile About")}
-              className="text-2xl font-display font-bold text-white py-2 border-b border-white/[0.06]"
+              href="#contact"
+              onClick={() => handleNavClick("Mobile Contact")}
+              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
             >
-              About
+              Contact
             </a>
           </div>
 

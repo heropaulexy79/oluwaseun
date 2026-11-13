@@ -84,23 +84,23 @@ export function Footer() {
             </h3>
             <ul className="space-y-2.5 text-slate-300">
               <li>
+                <a href="#why-partner" className="hover:text-white transition-colors">
+                  Why Partner
+                </a>
+              </li>
+              <li>
                 <a href="#work" className="hover:text-white transition-colors">
                   Selected Work
                 </a>
               </li>
               <li>
-                <a href="#capabilities" className="hover:text-white transition-colors">
-                  Capabilities
-                </a>
-              </li>
-              <li>
                 <a href="#calculator" className="hover:text-white transition-colors">
-                  Scope &amp; Pricing
+                  Pricing &amp; Scope
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-white transition-colors">
-                  About
+                <a href="#contact" className="hover:text-white transition-colors">
+                  Contact
                 </a>
               </li>
               <li className="pt-1">
