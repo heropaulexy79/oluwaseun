@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/sections/hero";
 import { WhyPartnerSection } from "@/components/sections/why-partner";
 import { PortfolioSection } from "@/components/sections/portfolio";
 import { ScopeEstimatorSection } from "@/components/sections/scope-estimator";
+import { FaqSection } from "@/components/sections/faq";
 import { ContactSection } from "@/components/sections/contact";
 import { FloatingWhatsApp } from "@/components/ui/floating-whatsapp";
 
@@ -14,6 +15,7 @@ export default function HomePage() {
         <WhyPartnerSection />
         <PortfolioSection />
         <ScopeEstimatorSection />
+        <FaqSection />
         <ContactSection />
       </main>
       <FloatingWhatsApp />
