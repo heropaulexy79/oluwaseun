@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
+
 @layer base {
-  :root {
+  /* Default: Dark Theme */
+  :root,
+  [data-theme="dark"],
+  html.dark {
     --bg-main: #0B0E14;
+    --bg-nav: rgba(11, 14, 20, 0.85);
     --bg-surface: #111620;
-    --bg-card: #161D2A;
+    --bg-card: #141A26;
+    --bg-card-subtle: rgba(255, 255, 255, 0.03);
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-highlight: rgba(255, 255, 255, 0.16);
 
@@ -15,6 +23,28 @@
     --brand-indigo: #6366F1;
     --brand-emerald: #10B981;
     --brand-whatsapp: #25D366;
+    --hero-glow-color: rgba(99, 102, 241, 0.14);
+  }
+
+  /* Light Theme */
+  [data-theme="light"],
+  html.light {
+    --bg-main: #F8FAFC;
+    --bg-nav: rgba(248, 250, 252, 0.85);
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-subtle: #F1F5F9;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.16);
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+
+    --brand-indigo: #4F46E5;
+    --brand-emerald: #059669;
+    --brand-whatsapp: #16A34A;
+    --hero-glow-color: rgba(99, 102, 241, 0.06);
   }
 
   html {
@@ -24,6 +54,13 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -62,17 +99,131 @@
 
 /* Subtle, clean radial lighting */
 .hero-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.01) 60%, transparent 80%);
+  background: radial-gradient(circle at 50% 0%, var(--hero-glow-color) 0%, transparent 70%);
 }
 
 .clean-card {
-  background: #111620;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease-in-out;
 }
 
 .clean-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: var(--border-highlight);
   transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Direct Light-Mode Overrides (Matches both html.light & [data-theme="light"])
+   ───────────────────────────────────────────────────────────── */
+
+html.light,
+[data-theme="light"],
+html.light body,
+[data-theme="light"] body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Master Hero Heading Overrides */
+html.dark .hero-headline-muted,
+[data-theme="dark"] .hero-headline-muted {
+  color: #94A3B8 !important;
+}
+
+html.dark .hero-headline-accent,
+[data-theme="dark"] .hero-headline-accent {
+  background: linear-gradient(135deg, #FFFFFF 20%, #E2E8F0 60%, #A5B4FC 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Light Mode: Elegant high-contrast dual-tone gradient blend */
+html.light .hero-headline-muted,
+[data-theme="light"] .hero-headline-muted {
+  color: #64748B !important;
+  -webkit-text-fill-color: #64748B !important;
+}
+
+html.light .hero-headline-accent,
+[data-theme="light"] .hero-headline-accent {
+  background: linear-gradient(135deg, #0F172A 0%, #312E81 50%, #4F46E5 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  display: inline-block !important;
+}
+
+/* Dark utility background classes overridden cleanly in light mode */
+html.light .bg-\[\#0B0E14\],
+[data-theme="light"] .bg-\[\#0B0E14\],
+html.light .bg-\[\#090B0E\],
+[data-theme="light"] .bg-\[\#090B0E\],
+html.light .bg-\[\#171A19\],
+[data-theme="light"] .bg-\[\#171A19\],
+html.light .bg-\[\#0C1318\],
+[data-theme="light"] .bg-\[\#0C1318\],
+html.light .bg-\[\#0E151A\],
+[data-theme="light"] .bg-\[\#0E151A\] {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light .bg-\[\#090C10\],
+[data-theme="light"] .bg-\[\#090C10\] {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+/* Text color overrides */
+html.light .text-white,
+[data-theme="light"] .text-white {
+  color: #0F172A !important;
+}
+
+html.light .text-slate-300,
+[data-theme="light"] .text-slate-300,
+html.light .text-slate-400,
+[data-theme="light"] .text-slate-400 {
+  color: #475569 !important;
+}
+
+/* Borders */
+html.light .border-white\/10,
+[data-theme="light"] .border-white\/10,
+html.light .border-white\/15,
+[data-theme="light"] .border-white\/15,
+html.light .border-white\/\[0\.08\],
+[data-theme="light"] .border-white\/\[0\.08\] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Subtle background pills */
+html.light .bg-white\/\[0\.03\],
+[data-theme="light"] .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\],
+[data-theme="light"] .bg-white\/\[0\.04\],
+html.light .bg-white\/\[0\.05\],
+[data-theme="light"] .bg-white\/\[0\.05\],
+html.light .bg-white\/\[0\.06\],
+[data-theme="light"] .bg-white\/\[0\.06\] {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .bg-white\/10,
+[data-theme="light"] .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+html.light .bg-white,
+[data-theme="light"] .bg-white {
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+html.light .text-black,
+[data-theme="light"] .text-black {
+  color: #FFFFFF !important;
 }

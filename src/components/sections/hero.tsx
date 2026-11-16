@@ -41,10 +41,10 @@ export function HeroSection() {
             id="hero-heading"
             className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1.12]"
           >
-            <span className="text-slate-400 font-bold block mb-1">
+            <span className="hero-headline-muted font-bold block mb-1 text-slate-500">
               Stop losing qualified buyers to slow websites.
             </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-indigo-200">
+            <span className="hero-headline-accent text-slate-900">
               I engineer conversion platforms that turn traffic into booked revenue.
             </span>
           </h1>

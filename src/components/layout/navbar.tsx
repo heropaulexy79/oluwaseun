@@ -6,6 +6,7 @@ import { Menu, X, ArrowUpRight, MessageSquare } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,7 +55,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#090B0E]/85 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-2xl shadow-black/60"
+          ? "bg-[var(--bg-nav)] backdrop-blur-xl border-b border-[var(--border-subtle)] py-3.5 shadow-xl"
           : "bg-transparent py-5 border-b border-transparent"
       }`}
     >
@@ -72,7 +73,7 @@ export function Navbar() {
             OS
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-bold text-base tracking-tight text-white group-hover:text-indigo-200 transition-colors leading-tight">
+            <span className="font-heading font-bold text-base tracking-tight text-white group-hover:text-indigo-400 transition-colors leading-tight">
               Oluwaseun
             </span>
             <span className="text-[11px] text-slate-400 font-sans tracking-normal">
@@ -80,15 +81,6 @@ export function Navbar() {
             </span>
           </div>
         </Link>
-
-        {/* Center: Live Availability Pill */}
-        <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-sans text-slate-300">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-          </span>
-          <span>Available for Q2-Q3 Projects</span>
-        </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-7">
@@ -114,6 +106,13 @@ export function Navbar() {
             Pricing &amp; Scope
           </a>
           <a
+            href="#faq"
+            onClick={() => handleNavClick("FAQ")}
+            className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
+          >
+            FAQ
+          </a>
+          <a
             href="#contact"
             onClick={() => handleNavClick("Contact")}
             className="text-xs uppercase tracking-wider font-mono text-slate-400 hover:text-white transition-colors"
@@ -122,8 +121,11 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons + Theme Toggle */}
         <div className="flex items-center gap-3">
+          {/* Theme Switcher Button */}
+          <ThemeToggle />
+
           <a
             href={whatsappUrl}
             target="_blank"
@@ -163,67 +165,77 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
           ref={mobileMenuRef}
-          role="dialog"
-          aria-modal="true"
-          className="md:hidden fixed inset-x-0 top-[60px] bottom-0 bg-[#090B0E]/98 backdrop-blur-2xl border-t border-white/10 p-6 flex flex-col justify-between overflow-y-auto"
+          className="md:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#0B0E14] border-t border-white/10 px-6 py-8 flex flex-col justify-between space-y-6 z-50 overflow-y-auto"
         >
-          <div className="flex flex-col gap-5 pt-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-slate-500">
-              NAVIGATION
-            </span>
-            <a
-              href="#why-partner"
-              onClick={() => handleNavClick("Mobile Why Partner")}
-              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
-            >
-              Why Partner
-            </a>
-            <a
-              href="#work"
-              onClick={() => handleNavClick("Mobile Work")}
-              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
-            >
-              Selected Work
-            </a>
-            <a
-              href="#calculator"
-              onClick={() => handleNavClick("Mobile Pricing")}
-              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
-            >
-              Pricing &amp; Scope
-            </a>
-            <a
-              href="#contact"
-              onClick={() => handleNavClick("Mobile Contact")}
-              className="text-2xl font-heading font-bold text-white py-2 border-b border-white/[0.06]"
-            >
-              Contact
-            </a>
+          <div className="space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <span className="text-xs uppercase tracking-wider text-slate-400 font-mono">
+                Theme &amp; Appearance
+              </span>
+              <ThemeToggle />
+            </div>
+
+            <div className="flex flex-col space-y-4">
+              <a
+                href="#why-partner"
+                onClick={() => handleNavClick("Why Partner")}
+                className="text-lg font-heading font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                Why Partner
+              </a>
+              <a
+                href="#work"
+                onClick={() => handleNavClick("Work")}
+                className="text-lg font-heading font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                Selected Work
+              </a>
+              <a
+                href="#calculator"
+                onClick={() => handleNavClick("Pricing")}
+                className="text-lg font-heading font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                Pricing &amp; Scope
+              </a>
+              <a
+                href="#faq"
+                onClick={() => handleNavClick("FAQ")}
+                className="text-lg font-heading font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                FAQ
+              </a>
+              <a
+                href="#contact"
+                onClick={() => handleNavClick("Contact")}
+                className="text-lg font-heading font-semibold text-white hover:text-indigo-400 transition-colors"
+              >
+                Contact
+              </a>
+            </div>
           </div>
 
-          <div className="pt-6 pb-8 border-t border-white/10 flex flex-col gap-3">
-            <a
-              href="#contact"
-              onClick={() => handleNavClick("Mobile Start CTA")}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-black font-sans font-bold text-sm text-center shadow-lg"
-            >
-              <span>Start a Project</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+          <div className="space-y-3 pt-6 border-t border-white/10">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => handleNavClick("Mobile WhatsApp CTA")}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#25D366] text-black font-sans font-bold text-sm text-center shadow-md"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#25D366] text-black font-semibold text-sm"
             >
               <MessageSquare className="w-4 h-4 fill-current" />
               <span>Chat on WhatsApp</span>
+            </a>
+            <a
+              href="#contact"
+              onClick={() => handleNavClick("Mobile Start Project")}
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white text-black font-semibold text-sm"
+            >
+              <span>Start a Project</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </div>
