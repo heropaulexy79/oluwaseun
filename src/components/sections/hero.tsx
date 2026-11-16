@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, CheckCircle2, MessageSquare, ShieldCheck, Zap, Sparkles } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, MessageSquare, ShieldCheck, Zap, Sparkles, Send, Database, Check } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function HeroSection() {
@@ -21,25 +21,37 @@ export function HeroSection() {
         {/* Master Sales Hook Header */}
         <div className="text-center max-w-3xl mx-auto space-y-6">
           
-          {/* Eyebrow: Credibility & Guarantee */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-medium text-white">Direct Senior Software Engineer</span>
-            <span className="text-white/30">•</span>
-            <span className="text-emerald-400 font-semibold">14-Day Sprint Delivery</span>
+          {/* Eyebrow: Human Founder Trust & Capacity Limit */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs text-slate-300">
+            <div className="w-5 h-5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-400 font-mono font-bold text-[10px] flex items-center justify-center">
+              OS
+            </div>
+            <span className="font-semibold text-white">Oluwaseun</span>
+            <span className="text-white/20">•</span>
+            <span className="text-slate-300">Senior Systems &amp; Web Architect</span>
+            <span className="text-white/20">•</span>
+            <span className="text-emerald-400 font-semibold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Booking Sprints for Q1
+            </span>
           </div>
 
-          {/* Master Headline: Problem & Outcome Centric */}
+          {/* Master Headline: Dual-Tone Contrast Hierarchy */}
           <h1
             id="hero-heading"
-            className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight text-white leading-[1.12]"
+            className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1.12]"
           >
-            Stop losing high-value clients to slow websites and delayed replies.
+            <span className="text-slate-400 font-bold block mb-1">
+              Stop losing qualified buyers to slow websites.
+            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-indigo-200">
+              I engineer conversion platforms that turn traffic into booked revenue.
+            </span>
           </h1>
 
           {/* Subtitle: Speed to Cash + Time Reclaimed */}
           <p className="text-lg sm:text-xl text-slate-300 font-sans leading-relaxed max-w-2xl mx-auto">
-            I build bespoke, sub-second web platforms and automated 24/7 WhatsApp deal-closers that qualify leads and turn traffic into booked revenue while you sleep.
+            Direct collaboration with a senior software engineer. Bespoke sub-second web platforms and automated 24/7 WhatsApp engines that qualify leads while you sleep.
           </p>
 
           {/* Action CTAs: Frictionless Closing */}
@@ -59,7 +71,7 @@ export function HeroSection() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 border border-[#25D366]/30 font-semibold text-sm transition-all"
             >
               <Sparkles className="w-4 h-4 fill-current" />
-              <span>Free 15-Min System Audit</span>
+              <span>Free 15-Min System Teardown</span>
             </a>
           </div>
 
@@ -67,15 +79,15 @@ export function HeroSection() {
           <div className="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs text-slate-400">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Sub-Second Page Loads</span>
+              <span>14-Day Delivery Sprint</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>&lt; 30s WhatsApp Lead Triage</span>
+              <span>&lt; 18s WhatsApp Lead Qualification</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Zero-Ghosting / 100% Code Ownership</span>
+              <span>100% IP &amp; Code Ownership</span>
             </div>
           </div>
         </div>
@@ -126,31 +138,43 @@ export function HeroSection() {
                     01 // 24/7 Autonomous Lead Capture
                   </span>
                   <h3 className="font-heading text-xl font-bold text-white">
-                    Every inbound lead qualified in &lt; 30 seconds.
+                    Every inbound lead qualified in &lt; 18 seconds.
                   </h3>
                   <p className="text-sm text-slate-300 leading-relaxed font-sans">
                     Never lose another deal to slow replies. Inbound traffic clicks your WhatsApp button, gets instantly greeted, budget-qualified, and logged into your spreadsheet automatically.
                   </p>
-                  <div className="p-4 rounded-xl bg-white/[0.04] border border-white/10 space-y-2 text-xs">
+                  
+                  {/* Live Spreadsheet Sync Notification Badge */}
+                  <div className="p-4 rounded-xl bg-emerald-500/[0.07] border border-emerald-500/20 space-y-2 text-xs">
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400">Lead Status:</span>
-                      <span className="text-emerald-400 font-semibold font-mono">QUALIFIED (₦1.2M Scope)</span>
+                      <span className="text-slate-300 font-medium flex items-center gap-1.5">
+                        <Database className="w-3.5 h-3.5 text-emerald-400" />
+                        Spreadsheet Sync:
+                      </span>
+                      <span className="text-emerald-400 font-semibold font-mono bg-emerald-500/10 px-2 py-0.5 rounded">
+                        ROW #142 APPENDED
+                      </span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-400">Response Speed:</span>
-                      <span className="text-white font-mono">18 seconds</span>
+                    <div className="flex items-center justify-between text-slate-400">
+                      <span>Lead Classification:</span>
+                      <span className="text-white font-mono">High Priority (₦1.2M Scope)</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-400">Spreadsheet Sync:</span>
-                      <span className="text-emerald-400 font-mono">Synced to Row #142</span>
+                    <div className="flex items-center justify-between text-slate-400">
+                      <span>Email &amp; Phone Alert:</span>
+                      <span className="text-emerald-300 font-mono">Dispatched to Founder</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="p-4 sm:p-5 rounded-xl bg-[#090C10] border border-white/10 font-sans text-xs space-y-3 shadow-inner">
-                  <div className="flex items-center gap-2 pb-2 border-b border-white/10">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                    <span className="text-slate-300 font-semibold">WhatsApp Business • Live Automated Triage</span>
+                  <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-slate-300 font-semibold">WhatsApp Business Triage</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                      ACTIVE AUTOMATION
+                    </span>
                   </div>
 
                   <div className="space-y-2.5 pt-1">
@@ -171,7 +195,7 @@ export function HeroSection() {
 
                     <div className="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-lg text-emerald-200 max-w-[85%] ml-auto">
                       <p className="text-[11px] text-emerald-400 font-mono mb-1">AI Deal Closer (10:15 PM):</p>
-                      &ldquo;Perfect fit! I have locked in your brief and notified Oluwaseun directly. He will send your custom blueprint by morning.&rdquo;
+                      &ldquo;Perfect fit! I have locked in your brief, logged your row, and notified Oluwaseun directly. He will send your custom blueprint by morning.&rdquo;
                     </div>
                   </div>
                 </div>
